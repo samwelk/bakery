@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="site.css" type="text/css">
+    <title>Bethany pie shop</title>
+    
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="pies.html">Pies</a></li>
+                <li><a href="contact.html">Contacts</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+       <aside> <img src = "images/logo.png" alt="bethanys pie shop"></aside>
+       <article>
+          <section class="column-desktop">
+              <div class="pie">
+                  <img src="images/apple-pie.png" alt="Apple-pie">
+                  <div class="columns">
+                      <div class="title">Apple pie</div>
+                      <div class="price">$12.5</div>
+                  </div>
+                  <p class="desc">Our fanous pie</p>
+                  <button data-order="apple-pie">Order</button>
+              </div>
+              <div class="pie">
+                <img src="images/cherry-pie.png" alt="Cherry-pie">
+                <div class="columns">
+                    <div class="title">Cherry pie</div>
+                    <div class="price">$15.5</div>
+                </div>
+                <p class="desc">A summer clasic </p>
+                <button data-order="apple-pie">Order</button>
+            </div>
+          </section>
+       </article>
+    </main>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="pies.html">Pies</a></li>
+                <li><a href="contact.html">Contacts</a></li>
+            </ul>
+        </nav>
+    </footer>
+</body>
+<script>
+    //loads this window first
+    window.addEventListener("DOMContentLoaded", function(e){
+        //get all buttons with order attributr
+        const orderButtons = document.querySelectorAll("button[data-order]");
+        //use for each to add event listener on all buttons
+        orderButtons.forEach(function(button){
+            //add an onclick listener on the buttons
+            button.addEventListener("click", function(e){
+                //get the current button
+                const button = e.currentTarget;
+                //add a constant container with the poarent
+                const container = button.parentNode;
+
+
+                const order={
+                    id:button.getAttribute("data-order"),
+                    title:container.querySelector(".title").innerText,
+                    price:container.querySelector(".price").innerText,
+                    desc:container.querySelector(".desc").innerText
+                };
+                localStorage.setItem("order", JSON.stringify(order));
+                const url = window.location.href.replace("pies.html", "order.html");
+                window.location.href = url;
+        
+            });
+
+        });
+
+    });
+</script>
+</html>
